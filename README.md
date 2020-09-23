@@ -111,11 +111,11 @@ Here you must use the connection chain that your server provides you with where 
 (7) specify password for LDAP admin account
 ```
 
-Use the LDAP service management account key that allows to query/manage users in the ``cn=admin,dc=imuds,dc=en``
+Use the LDAP service management account key that allows to query/manage users in the ``cn=admin,dc=imuds,dc=ee``
 
 After the installation is completed, the following files must be modified:
 
-#### /etc/nsswitch.con
+#### /etc/nsswitch.conf
 
 ```
 vi /etc/nsswitch.conf 
@@ -126,6 +126,8 @@ Add ``ldap`` to the ``passwd`` and ``group`` entities and you must leave exactly
 passwd:         compat systemd ldap
 group:          compat systemd ldap
 shadow:         compat
+gshadows:       files
+....
 ```
 
 #### /etc/pam.d/common-password 
@@ -154,4 +156,5 @@ Add to the end of the file the following sentence, in order to add home folder w
 session optional        pam_mkhomedir.so skel=/etc/skel umask=077
 ```
 
+*Optional:* Modify ``/etc/skel`` folder in order to add command aliases, welcome messages, user configurations, etc.
 
