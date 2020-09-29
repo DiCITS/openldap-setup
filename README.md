@@ -111,7 +111,27 @@ Here you must use the connection chain that your server provides you with where 
 (7) specify password for LDAP admin account
 ```
 
-Use the LDAP service management account key that allows to query/manage users in the ``cn=admin,dc=imuds,dc=ee``
+Use the LDAP service management account key that allows to query/manage users in the ``cn=admin,dc=imuds,dc=es``
+
+After this setup run:
+
+
+```
+pam-auth-update --force
+```
+
+Select the following ``[*]`` :
+
+
+```
+  │    [ ] Pwquality password strength checking                                                                  │ 
+  │    [*] Unix authentication                                                                                   │ 
+  │    [ ] SSS authentication                                                                                    │ 
+  │    [*] LDAP Authentication                                                                                   │ 
+  │    [*] Register user sessions in the systemd control group hierarchy                                         │ 
+  │    [*] Create home directory on login                                                                        │ 
+  │    [*] Inheritable Capabilities Management
+```
 
 After the installation is completed, the following files must be modified:
 
@@ -157,4 +177,6 @@ session optional        pam_mkhomedir.so skel=/etc/skel umask=077
 ```
 
 *Optional:* Modify ``/etc/skel`` folder in order to add command aliases, welcome messages, user configurations, etc.
+
+
 
